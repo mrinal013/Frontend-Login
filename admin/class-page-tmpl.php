@@ -32,8 +32,8 @@ class TemplateFromPlugin {
 		add_filter( 'template_include', array( $this, 'view_project_template' ) );
 
 		$this->templates = array(
-			'../template/page-login.php' => 'Login Page Template',
-			'../template/page-user.php' => 'User Profile Page Template',
+			'../frontend/template/page-login.php' => 'Login Page Template',
+			'../frontend/template/page-user.php' => 'User Page Template',
 		);
 	}
 
