@@ -1,6 +1,7 @@
 <?php
 
 class LostPassword {
+	
 	public function __construct() {
 		add_action( 'lostpassword_post', array( $this, 'front_user_reset_password'));
 	}

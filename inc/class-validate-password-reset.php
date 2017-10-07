@@ -1,6 +1,7 @@
 <?php
 
 class ValidatePasswordReset {
+	
 	public function __construct() {
 		add_action('validate_password_reset', array( $this, 'front_user_validate_password_reset' ), 10, 2 );
 	}

@@ -1,14 +1,6 @@
 <?php
 
 class LoginInit {
-	private static $instance;
-
-	public static function get_instance() {
-		if( null == self::$instance ) {
-			self::$instance = new LoginInit();
-		}
-		return self::$instance;
-	}
 
 	public function __construct() {
 		add_action( 'login_init', array( $this, 'front_user_login_init' ) );
@@ -49,4 +41,4 @@ class LoginInit {
 		exit;
 	}
 }
-add_action( 'plugins_loaded', array( 'LoginInit', 'get_instance' ) );
+new LoginInit();

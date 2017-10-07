@@ -1,6 +1,7 @@
 <?php
 
 class AdministratorsPass {
+	
 	public function __construct() {
 		add_action( 'admin_init', array( $this, 'front_user_admin_init' ) );
 	}
