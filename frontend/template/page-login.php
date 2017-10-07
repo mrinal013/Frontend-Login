@@ -20,7 +20,7 @@ get_header(); ?>
 				</div>
 			<?php endif; //endif ( !$success && $action != 'resetpass' ): ?>
 
-			<article id="page-<?php the_ID(); ?>" class="meta-box hentry">
+			<article class="meta-box hentry">
 				<div id="page-login" class="post-content page-login cf">
 
 <?php if ( $action == 'register' && $success ): ?>

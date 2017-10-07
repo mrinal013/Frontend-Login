@@ -9,6 +9,7 @@ class Enqueue {
 
 	public function front_user_enqueue_style() {
 		wp_enqueue_style( 'jquery-ui-style', plugin_dir_url( __FILE__ ) . '../frontend/assets/css/jquery-ui.css' );
+		wp_enqueue_style( 'front-user-style', plugin_dir_url( __FILE__ ) . '../frontend/assets/css/style.css' );
 	}
 
 	public function front_user_enqueue_script() {
