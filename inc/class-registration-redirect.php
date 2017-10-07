@@ -1,6 +1,7 @@
 <?php
 
 class RegistrationRedirct {
+
 	public function __construct() {
 		add_filter('registration_errors', array( $this, 'front_user_registration_redirect' ), 10, 3);
 	}
@@ -32,3 +33,4 @@ class RegistrationRedirct {
 		return $errors;
 	}
 }
+new RegistrationRedirct();

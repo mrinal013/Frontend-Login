@@ -1,6 +1,14 @@
 <?php
 
 class Enqueue {
+	private static $instance;
+
+	public static function get_instance() {
+		if( null == self::$instance ) {
+			self::$instance = new Enqueue();
+		}
+		return self::$instance;
+	}
 
 	public function __construct() {
 
@@ -19,5 +27,4 @@ class Enqueue {
     	wp_enqueue_script( 'front_user_script', plugin_dir_url( __FILE__ ) . '../frontend/assets/js/script.js', array('jquery'), null, true);
 	}
 }
-
-new Enqueue;
+add_action( 'plugins_loaded', array( 'Enqueue', 'get_instance' ) );

@@ -3,7 +3,7 @@
 class LoginRedirect {
 
 	public function __construct() {
-		add_filter('login_redirect', array( $this, , 'front_user_login_redirect' ), 10, 3);
+		add_filter('login_redirect', array( $this, 'front_user_login_redirect' ), 10, 3 );
 	}
 
 	public function front_user_login_redirect( $redirect_to, $url, $user ) {
@@ -14,3 +14,4 @@ class LoginRedirect {
 		exit;
 	}
 }
+new LoginRedirect();

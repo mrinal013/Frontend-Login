@@ -1,6 +1,7 @@
 <?php
 
 class Redirect {
+
 	public function __construct() {
 		add_action( 'template_redirect', array( $this, 'front_user_template_redirect' ) );
 	}
@@ -16,3 +17,4 @@ class Redirect {
 		}
 	}
 }
+new Redirect();
