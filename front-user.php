@@ -49,7 +49,7 @@ new LostPassword();
 include_once "inc/class-validate-password-reset.php";
 new ValidatePasswordReset();
 
-include_once "frontend/class-enqueue.php";
+include_once "inc/class-enqueue.php";
 
 
 /**

@@ -2,26 +2,26 @@
 $action = !empty( $_GET['action'] ) && ($_GET['action'] == 'register' || $_GET['action'] == 'forgot' || $_GET['action'] == 'resetpass') ? $_GET['action'] : 'login';
 $success = !empty( $_GET['success'] );
 $failed = !empty( $_GET['failed'] ) ? $_GET['failed'] : false;
-?>
 
-<?php get_header(); ?>
+get_header(); ?>
+
 <div class="wrap">
-<div id="primary" class="content-area">
-<main id="main" class="site-main wrapper" role="main">
-	<div class="main-column">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main wrapper" role="main">
+			<div class="main-column">
 
-	<?php while ( have_posts() ) : the_post(); ?>
+			<?php if ( !$success && $action != 'resetpass' ): ?>
+				<div id="tabs">
+					<ul class="tabs cf" id="login-tabs">
+						<li class="<?php if ($action == 'login') echo 'active-tab'; ?>"><a href="#tab-login">Login</a></li>
+						<li class="<?php if ($action == 'register') echo 'active-tab'; ?>"><a href="#tab-register">Register</a></li>
+						<li class="<?php if ($action == 'forgot') echo 'active-tab'; ?>"><a href="#tab-forgot">Forgot?</a></li>
+					</ul>
+				</div>
+			<?php endif; //endif ( !$success && $action != 'resetpass' ): ?>
 
-<?php if ( !$success && $action != 'resetpass' ): ?>
-	<ul class="tabs cf" id="login-tabs">
-		<li class="<?php if ($action == 'login') echo 'active-tab'; ?>"><a href="#tab-login">Login</a></li>
-		<li class="<?php if ($action == 'register') echo 'active-tab'; ?>"><a href="#tab-register">Register</a></li>
-		<li class="<?php if ($action == 'forgot') echo 'active-tab'; ?>"><a href="#tab-forgot">Forgot?</a></li>
-	</ul>
-<?php endif; ?>
-
-	<article id="page-<?php the_ID(); ?>" class="meta-box hentry">
-		<div id="page-login" class="post-content page-login cf">
+			<article id="page-<?php the_ID(); ?>" class="meta-box hentry">
+				<div id="page-login" class="post-content page-login cf">
 
 <?php if ( $action == 'register' && $success ): ?>
 
@@ -60,14 +60,14 @@ $failed = !empty( $_GET['failed'] ) ? $_GET['failed'] : false;
 
 			<div id="tab-login" class="tab-content" style="<?php if ( $action != 'login' ) echo 'display:none' ?>">
 
-<?php if ( $action == 'login' && $failed ): ?>
-			<div class="message-box message-error">
-				<span class="icon-attention"></span>
-				<?php if ( $failed ): ?>
-					Invalid username or password. Please try again.
+				<?php if ( $action == 'login' && $failed ): ?>
+							<div class="message-box message-error">
+								<span class="icon-attention"></span>
+								<?php if ( $failed ): ?>
+									Invalid username or password. Please try again.
+								<?php endif; ?>
+							</div>
 				<?php endif; ?>
-			</div>
-<?php endif; ?>
 
 				<header class="entry-header">
 					<h1 class="entry-title">Login</h1>
@@ -83,22 +83,22 @@ $failed = !empty( $_GET['failed'] ) ? $_GET['failed'] : false;
 
 			<div id="tab-register" class="tab-content" style="<?php if ( $action != 'register' ) echo 'display:none' ?>">
 
-<?php if ( $action == 'register' && $failed ): ?>
-			<div class="message-box message-error">
-				<span class="icon-attention"></span>
-				<?php if ( $failed == 'invalid_character' ): ?>
-					Username can only contain alphanumerical characters, "_" and "-". Please choose another username.
-				<?php elseif ( $failed == 'username_exists' ): ?>
-					Username already in use.
-				<?php elseif ( $failed == 'email_exists' ): ?>
-					E-mail already in use. Maybe you are already registered?
-				<?php elseif ( $failed == 'empty' ): ?>
-					All fields are required.
-				<?php else: ?>
-					An error occurred while registering the new user. Please try again.
+				<?php if ( $action == 'register' && $failed ): ?>
+							<div class="message-box message-error">
+								<span class="icon-attention"></span>
+								<?php if ( $failed == 'invalid_character' ): ?>
+									Username can only contain alphanumerical characters, "_" and "-". Please choose another username.
+								<?php elseif ( $failed == 'username_exists' ): ?>
+									Username already in use.
+								<?php elseif ( $failed == 'email_exists' ): ?>
+									E-mail already in use. Maybe you are already registered?
+								<?php elseif ( $failed == 'empty' ): ?>
+									All fields are required.
+								<?php else: ?>
+									An error occurred while registering the new user. Please try again.
+								<?php endif; ?>
+							</div>
 				<?php endif; ?>
-			</div>
-<?php endif; ?>
 
 				<header class="entry-header">
 					<h1 class="entry-title">Register</h1>
@@ -125,23 +125,26 @@ $failed = !empty( $_GET['failed'] ) ? $_GET['failed'] : false;
 					<p id="reg_passmail">A password will be e-mailed to you.</p>
 
 					<input type="hidden" name="redirect_to" value="/login/?action=register&amp;success=1" />
-					<p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Register" /></p>
+					<p class="submit">
+						<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Register" /
+						>
+					</p>
 				</form>
 
 			</div>
 
 			<div id="tab-forgot" class="tab-content" style="<?php if ( $action != 'forgot' ) echo 'display:none' ?>">
 
-<?php if ( $action == 'forgot' && $failed ): ?>
-			<div class="message-box message-error">
-				<span class="icon-attention"></span>
-				<?php if ( $failed == 'wrongkey' ): ?>
-					The reset key is wrong or expired. Please check that you used the right reset link or request a new one.
-				<?php else: ?>
-					Sorry, we couldn't find any user with that username or email.
+				<?php if ( $action == 'forgot' && $failed ): ?>
+							<div class="message-box message-error">
+								<span class="icon-attention"></span>
+								<?php if ( $failed == 'wrongkey' ): ?>
+									The reset key is wrong or expired. Please check that you used the right reset link or request a new one.
+								<?php else: ?>
+									Sorry, we couldn't find any user with that username or email.
+								<?php endif; ?>
+							</div>
 				<?php endif; ?>
-			</div>
-<?php endif; ?>
 				<header class="entry-header">
 					<h1 class="entry-title">Password recovery</h1>
 				</header>
@@ -160,20 +163,20 @@ $failed = !empty( $_GET['failed'] ) ? $_GET['failed'] : false;
 					<p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Get New Password" /></p>
 				</form>
 
-			</div>
+			</div> <!-- #tab forgot -->
 
 
-<?php if ( $action == 'resetpass' ): ?>
+			<?php if ( $action == 'resetpass' ): ?>
 
-	<div id="tab-resetpass" class="tab-content">
+				<div id="tab-resetpass" class="tab-content">
 
-	<?php if ( $failed ): ?>
-			<div class="message-box message-error">
-				<span class="icon-attention"></span>
-				The passwords don't match. Please try again.
-			</div>
+				<?php if ( $failed ): ?>
+						<div class="message-box message-error">
+							<span class="icon-attention"></span>
+							The passwords don't match. Please try again.
+						</div>
 
-	<?php endif; ?>
+				<?php endif; ?>
 
 				<header class="entry-header">
 					<h1 class="entry-title">Reset password</h1>
@@ -206,50 +209,14 @@ $failed = !empty( $_GET['failed'] ) ? $_GET['failed'] : false;
 					<p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Get New Password" /></p>
 				</form>
 			</div>
+		<?php endif; // end action=resetpass ?>
 <?php endif; ?>
 
+				</div>
+			</article>
 
-<?php endif; ?>
-
-		</div>
-	</article>
-
-	<?php endwhile; ?>
-
-	</div><!-- .main-column -->
-	</main>
-	</div>
-
-	<?php get_sidebar(); ?>
-</main><!-- #main -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-// tabs
-$('#login-tabs a').click(function (e) {
-	e.preventDefault();
-	$this = $(this);
-	// add class to tab
-	$('#login-tabs li').removeClass('active-tab');
-	$this.parent().addClass('active-tab');
-	// show the right tab
-	$('#page-login .tab-content').hide();
-	$('#page-login ' + $this.attr('href')).show();
-	return false;
-});
-
-$('.sign-up').click(function(e) {
-	e.preventDefault();
-	$this = $(this);
-
-	// add class to tab
-	$('#login-tabs li').removeClass('active-tab');
-	$('#tab-register li').addClass('active-tab');
-	// show the right tab
-	$('#page-login .tab-content').hide();
-	$('#page-login ' + $this.attr('href')).show();
-	return false;
-});
-</script>
+		</div><!-- .main-column -->
+	</main><!-- site-main.wrapper -->
+</div> <!-- .primary -->
 
 <?php get_footer(); ?>

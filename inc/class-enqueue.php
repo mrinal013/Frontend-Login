@@ -15,8 +15,8 @@ class Enqueue {
 	}
 
 	public function front_user_enqueue_script() {
-    	wp_enqueue_script( 'jquery-ui' , 'https://code.jquery.com/ui/1.12.1/jquery-ui.js', array( 'jquery' ), null, true );
-    	wp_enqueue_script( 'front_user_script', plugin_dir_url( __FILE__ ) . 'assets/js/script.js', array('jquery'), null, true);
+    	wp_enqueue_script( 'jquery-ui' , plugin_dir_url( __FILE__ ) . '../frontend/assets/js/jquery-ui.js', array( 'jquery' ), null, true );
+    	wp_enqueue_script( 'front_user_script', plugin_dir_url( __FILE__ ) . '../frontend/assets/js/script.js', array('jquery'), null, true);
 	}
 }
 

@@ -32,12 +32,12 @@ if ( !empty($_POST) && !empty( $_POST['action'] ) && $_POST['action'] == 'update
 
 <?php get_header(); ?>
 
-<main id="main" class="site-main wrapper" role="main">
-	<div class="main-column">
+<div class="wrap">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main wrapper" role="main">
+			<div class="main-column">
 
-	<?php while ( have_posts() ) : the_post(); ?>
-
-	<article id="page-<?php the_ID(); ?>" class="meta-box hentry">
+	<article class="meta-box hentry">
 		<div class="post-content cf">
 
 <?php if ( !empty($_GET['success']) ): ?>
@@ -101,11 +101,10 @@ do_action('edit_user_profile', $current_user);
 		</div>
 	</article>
 
-	<?php endwhile; ?>
 
 	</div><!-- .main-column -->
-
-	<?php get_sidebar(); ?>
 </main><!-- #main -->
+</div>
+</div>
 
 <?php get_footer(); ?>
