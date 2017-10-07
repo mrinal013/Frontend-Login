@@ -11,8 +11,8 @@ get_header(); ?>
 			<div class="main-column">
 
 			<?php if ( !$success && $action != 'resetpass' ): ?>
-				<div id="tabs">
-					<ul class="tabs cf" id="login-tabs">
+				<div id="login-tabs">
+					<ul  >
 						<li class="<?php if ($action == 'login') echo 'active-tab'; ?>"><a href="#tab-login">Login</a></li>
 						<li class="<?php if ($action == 'register') echo 'active-tab'; ?>"><a href="#tab-register">Register</a></li>
 						<li class="<?php if ($action == 'forgot') echo 'active-tab'; ?>"><a href="#tab-forgot">Forgot?</a></li>
